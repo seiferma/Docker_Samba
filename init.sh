@@ -37,6 +37,20 @@ ln -s $TDB_USERS /var/lib/samba/private
 if [ "$1" == "smbd" ]; then
     echo "Starting samba server"
     smbd -FS -s $VOL_CFG/smb.conf
+
+elif [ "$1" == "adduser" ]; then
+    if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
+        echo "You have to specify an username, an user id, and password"
+        exit 1
+    fi
+    echo "Adding new user $2"
+    USERDIR=$VOL_HOME/$2
+    adduser -s /bin/false -h $USERDIR -u $3 -D $2
+    echo -e "$4\n$4" | pdbedit -a -u $2 -t
+    sed -i -E 's/'"$USER_GROUP"':(.):([0-9]+):(.+)$/'"$USER_GROUP"':\1:\2:'"$2"',\3/g' /etc/group
+    sed -i -E 's/'"$USER_GROUP"':(.):([0-9]+):$/'"$USER_GROUP"':\1:\2:'"$2"'/g' /etc/group
+    chmod -R 750 $USERDIR
+
 else
     echo "Executing command"
     exec "$@"
