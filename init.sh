@@ -36,7 +36,7 @@ ln -s $TDB_USERS /var/lib/samba/private
 
 if [ "$1" == "smbd" ]; then
     echo "Starting samba server"
-    smbd -FS -d 1 -s $VOL_CFG/smb.conf < /dev/null
+    smbd -F -S -s $VOL_CFG/smb.conf < /dev/null
 
 elif [ "$1" == "adduser" ]; then
     if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
@@ -47,9 +47,9 @@ elif [ "$1" == "adduser" ]; then
     USERDIR=$VOL_HOME/$2
     adduser -s /bin/false -h $USERDIR -u $3 -D $2
     echo -e "$4\n$4" | pdbedit -a -u $2 -t
-    sed -i -E 's/'"$USER_GROUP"':(.):([0-9]+):(.+)$/'"$USER_GROUP"':\1:\2:'"$2"',\3/g' /etc/group
-    sed -i -E 's/'"$USER_GROUP"':(.):([0-9]+):$/'"$USER_GROUP"':\1:\2:'"$2"'/g' /etc/group
     chmod -R 750 $USERDIR
+    sed -i -E "s/$USER_GROUP:(.):([0-9]+):(.+)\$/$USER_GROUP:\1:\2:$2,\3/g" $UNIX_USERS/group
+    sed -i -E "s/$USER_GROUP:(.):([0-9]+):\$/$USER_GROUP:\1:\2:$2/g" $UNIX_USERS/group
 
 else
     echo "Executing command"
