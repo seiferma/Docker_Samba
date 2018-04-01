@@ -6,13 +6,13 @@ before_install:
   - git clone --depth 1 https://github.com/seiferma/Docker_BuildUtils.git /tmp/BuildUtils
   - . /tmp/BuildUtils/travisSetup.sh
 script:
-  - travisBuild.sh
+  - travisBuildDockerhub.sh
 deploy:
   provider: script
-  script: travisDeploy.sh
+  script: travisDeployDockerhub.sh
   on:
     branch: master
 env:
   global: 
     - IMAGE_NAME=seiferma/samba
-    - secure: "ATvMJ3u1/WCBzKX8dpfg/1p/uqPjm5bH1u0D/blf4DPsEOZ0YnPBwOkQbW0pn2XnaAwvZ0ytpwurOpl7PyOPYpj/SPxoPuwg6YSjHC8c7FAUaoEIZ9igcQ3Zb5wTLplqG1hEc+w7XfflF03x3Eps2oAqVEg5GyJr/hEpzs3QlIzj+cFVNkpcJ1gsl3aIpOxIWIlAiMKpP4razGQF4Z7PlEabGxewRSPNh8Lqd1m6tgTmrYvkHB/pGJQn1lthw7oq3d/7lXLbA4pWPGksJfMrh+VVvMz+xDW42cnOowVIAAIY4JqBbkYxzVBlRoOcOO4RxRL2CWT2l//a+/ke2OIOBj42PV4itcic1r7ezFRxKKRpEKHb496teFGNOxR4XTozIFlPl+a92yo4sU7nCl8NUYSIQaNLjO1ucgeCGEO9CvKdbRtbw7MUMiKF5y+EjnqseKALtaBswmicMDdXxiNzOTKihpJe3rjzU7jcNTTsdLHogdNv/PHhUQbl0i2oR6+eLjjNjugO/kA5WEg7Icjx8C+v7+nCKOQqCAw6D+g29Ved+OsVwWTutL8uwB6FFmOagZsnMtOGoKKNNKU4a36YEs9opDpre8DRqLl8xzcwnlrco2/yHmpsumCxVE77upa6eRyuq/D4U4Z9dpBQPpUjcVQyAHvoZH+D1LUCGmI1tBQ="
+    - secure: "NDcKLeH5up8TlRneakm0IR1E/leA/lALnkmrx4IifwlBKJOv+9eFXhNjMxb3P6v1stnHC9A3LZAhb3H4u7lWj2329ChuV5OZBukY3gby8Ow8WS9X7nk6pFwL1RAU7mpRFiYsWKWj8QWHoRi2ZVMH5nxt+5Nt2y0WGf6sE6ssT7e902Avk3+7Hr3nFuXP1xxcZxVdG8U+knZMTChuABMKfYfj5ajit/rKyzP6pV3DcpTJxr9H8HW58VgRe29HZdgz+2HlFkgZn9a0MtJ+RPKw4zohHrX8P5AJIKbBtZeJ+G1K5VEdScY0rrZX5adHB1NurBN4SWBHbnVaBS1c8R2VSDtxswWDcUfL9huNFUNXa1gCttiuubAgg6Yysh6fABICp14eqrUcZtDIfhlDu7XNtxHF6CxlNsHbl3VtFeJ0TG2Ycw7b84tyBl8I2a5TVPWtGeP+egQSwhnwo1JsES1FG5C04VBc4m4SLYcuwYIkddBKTE0saXaW6JpyMlOffXunJm0GUZiNof/22p6STrAt84H7eLT4FbCiLvxHPimnF4y4QokGg70JODIIUjNym6EkKnCLKU4XS1d7fNj4cVw21SAiKP6YLQA72C+W1Qaapa7lzuD/aawf39ZGIbHzo0LIizRzcTwI7al04RUPyN1qQQ+HX/FT7Imc7Y7m7EnBw9w="
