@@ -36,7 +36,7 @@ ln -s $TDB_USERS /var/lib/samba/private
 
 if [ "$1" == "smbd" ]; then
     echo "Starting samba server"
-    exec smbd -F -S -s $VOL_CFG/smb.conf < /dev/null
+    exec smbd --no-process-group -F -S -s $VOL_CFG/smb.conf < /dev/null
 
 elif [ "$1" == "adduser" ]; then
     if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
