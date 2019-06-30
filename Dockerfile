@@ -6,7 +6,7 @@ ENV USER_GROUP=smbusers
 ENV VOL_CFG=/samba/cfg
 ENV VOL_HOME=/samba/home
 
-RUN VERSION=4.8.12-r0 && \
+RUN VERSION=4.10.5-r0 && \
     apk --no-cache add samba=${VERSION} && \
     VERSION= && \
     addgroup -g 2500 ${USER_GROUP}
